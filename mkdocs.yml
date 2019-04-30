@@ -25,6 +25,7 @@ theme:
 # Customization
 extra_javascript:
     - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+    
 extra:
   manifest: 'manifest.webmanifest'
   social:
@@ -34,6 +35,8 @@ extra:
       link: 'https://twitter.com/elswork'
     - type: 'linkedin'
       link: 'https://linkedin.com/in/elswork'
+    - type: 'docker'
+      link: 'https://hub.docker.com/u/elswork'
 
 # Google Analytics
 google_analytics:
