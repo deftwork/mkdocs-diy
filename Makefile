@@ -1,4 +1,4 @@
-SNAME ?= mkdocks-diy
+SNAME ?= mkdocs-diy
 NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= alpine3.9
@@ -29,6 +29,7 @@ debug: ## Build the container
 build: ## Build the container
 	docker build --no-cache -t $(NAME):$(GOARCH) --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
+	--build-arg MKVERSION=$(VER) \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) . > ../builds/$(SNAME)_$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
 tag: ## Tag the container
@@ -43,16 +44,16 @@ manifest: ## Create an push manifest
 	docker manifest create $(NAME):latest $(NAME):$(GOARCH) $(NAME):$(ARCH2)
 	docker manifest push --purge $(NAME):latest
 start: ## Start the container
-	docker run -it -d -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
+	docker run -it -d -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
 help: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
 version: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
 new: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs new mkdocs
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs new mkdocs
 serve: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
 helpserve: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
 mkbuild: 
-	docker run -it --rm -v $(CURDIR)/mkdocs:/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build

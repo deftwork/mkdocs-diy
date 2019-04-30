@@ -4,6 +4,12 @@ A [Docker](http://docker.com) file to build images for AMD & ARM devices with a 
 
 > Be aware! You should read carefully the usage documentation of every tool!
 
+## Thanks to
+
+- [Mkdocs](https://www.mkdocs.org/)
+- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+- All the extensions and packages that made this possible.
+
 ## Details
 
 - [GitHub](https://github.com/DeftWork/mkdocs-diy)

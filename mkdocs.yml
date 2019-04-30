@@ -1,0 +1,65 @@
+# Project information
+site_name: 'MkDocs DoItYourself'
+site_description: 'A Multiarch docker container for MkDocs + Material Design theme'
+site_author: 'Eloy Lopez'
+site_url: 'https://DeftWork.github.io/mkdocs-diy/'
+
+# Repository
+repo_name: 'DeftWork/mkdocs-diy'
+repo_url: 'https://github.com/DeftWork/mkdocs-diy'
+
+# Copyright
+copyright: 'Copyright &copy; 2019 Eloy Lopez'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# Customization
+extra_javascript:
+    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+extra:
+  manifest: 'manifest.webmanifest'
+  social:
+    - type: 'github'
+      link: 'https://github.com/DeftWork'
+    - type: 'twitter'
+      link: 'https://twitter.com/elswork'
+    - type: 'linkedin'
+      link: 'https://linkedin.com/in/elswork'
+
+# Google Analytics
+google_analytics:
+  - 'UA-XXXXXXXX-X'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
