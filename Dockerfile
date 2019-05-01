@@ -1,4 +1,4 @@
-ARG BASEIMAGE=python:3.7.3-alpine3.9
+ARG BASEIMAGE=python:3.6.8-alpine3.9
 FROM ${BASEIMAGE}
 
 ARG BUILD_DATE
@@ -15,13 +15,10 @@ LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-ARG MKVERSION=1.0.4
-ARG MKDOCSVER=mkdocs==$MKVERSION
-
-RUN pip install $MKDOCSVER \
-                pygments \
-                pymdown-extensions \
-                mkdocs-material
+RUN pip install mkdocs==1.0.4 \
+    pygments \
+    pymdown-extensions \
+    mkdocs-material
 
 WORKDIR /mkdocs
 

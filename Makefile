@@ -2,7 +2,7 @@ SNAME ?= mkdocs-diy
 NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= alpine3.9
-BASENAME ?= python:3.7.3-$(BASE)
+BASENAME ?= python:3.6.8-$(BASE)
 ARCH2 ?= armv7l
 GOARCH := $(shell uname -m)
 ifeq ($(GOARCH),x86_64)
@@ -29,7 +29,6 @@ debug: ## Build the container
 build: ## Build the container
 	docker build --no-cache -t $(NAME):$(GOARCH) --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
-	--build-arg MKVERSION=$(VER) \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(SNAME)_$(GOARCH)_$(VER) . > ../builds/$(SNAME)_$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
 tag: ## Tag the container
@@ -47,6 +46,8 @@ start: ## Start the container
 	docker run -it -d -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
 help: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
+helpgh: 
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs gh-deploy -h
 version: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
 new: 
@@ -57,3 +58,5 @@ helpserve:
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
 mkbuild: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build
+gh:
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs gh-deploy
