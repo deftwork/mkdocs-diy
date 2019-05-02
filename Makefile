@@ -2,7 +2,7 @@ SNAME ?= mkdocs-diy
 NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= alpine3.9
-BASENAME ?= python:3.6.8-$(BASE)
+BASENAME ?= python:$(VER)-$(BASE)
 ARCH2 ?= armv7l
 GOARCH := $(shell uname -m)
 ifeq ($(GOARCH),x86_64)
@@ -43,20 +43,16 @@ manifest: ## Create an push manifest
 	docker manifest create $(NAME):latest $(NAME):$(GOARCH) $(NAME):$(ARCH2)
 	docker manifest push --purge $(NAME):latest
 start: ## Start the container
-	docker run -it -d -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
+	docker run -it -rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
 help: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
-helpgh: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs gh-deploy -h
 version: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
 new: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs new mkdocs
 serve: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
+	docker run -it  -rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
 helpserve: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
 mkbuild: 
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build
-gh:
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs gh-deploy

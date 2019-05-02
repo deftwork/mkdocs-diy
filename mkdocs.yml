@@ -22,6 +22,10 @@ theme:
     text: 'Roboto'
     code: 'Roboto Mono'
 
+# Avoid collision with gh-pages
+docs_dir: 'mkdocs'
+site_dir: 'docs'
+
 # Customization
 extra_javascript:
     - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
