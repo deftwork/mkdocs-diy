@@ -27,8 +27,10 @@ docs_dir: 'mkdocs'
 site_dir: 'docs'
 
 # Customization
+extra_css:
+  - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
 extra_javascript:
-    - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+  - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
     
 extra:
   manifest: 'manifest.webmanifest'
@@ -44,7 +46,7 @@ extra:
 
 # Google Analytics
 google_analytics:
-  - 'UA-XXXXXXXX-X'
+  - 'UA-139487885-1'
   - 'auto'
 
 # Extensions
@@ -66,7 +68,12 @@ markdown_extensions:
   - pymdownx.magiclink
   - pymdownx.mark
   - pymdownx.smartsymbols
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
+

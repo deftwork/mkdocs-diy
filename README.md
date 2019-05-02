@@ -1,4 +1,4 @@
-# MkDocs-diy
+# MkDocs-DIY
 
 A [Docker](http://docker.com) file to build images for AMD & ARM devices with a installation of [MkDocs](https://www.mkdocs.org/) that is a fast, simple and downright gorgeous static site generator that's geared towards building project documentation. Documentation source files are written in Markdown, and configured with a single YAML configuration file. [Documentation](https://deftwork.github.io/mkdocs-diy/) for this container is written using itself.
 
@@ -24,16 +24,16 @@ A [Docker](http://docker.com) file to build images for AMD & ARM devices with a 
 
 Build for amd64 or armv7l architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
 
-```sh
-docker build -t elswork/mkdocs-diy:latest .
+``` sh
+docker build -t elswork/mkdocs-diy .
 ```
 
 ## My Real Usage Example
 
 In order everyone could take full advantages of the usage of this docker container, I'll describe my own real usage setup.
 
-```sh
+``` sh
 docker run -d -p 7777:7777 elswork/mkdocs-diy:latest
 ```
 
-Point your browser to `http://localhost:7777`
+Point your browser to `http://host-ip:7777`

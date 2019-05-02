@@ -2,7 +2,7 @@ SNAME ?= mkdocs-diy
 NAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= alpine3.9
-BASENAME ?= python:$(VER)-$(BASE)
+BASENAME ?= python:3.7.2-$(BASE)
 ARCH2 ?= armv7l
 GOARCH := $(shell uname -m)
 ifeq ($(GOARCH),x86_64)
@@ -42,17 +42,13 @@ manifest: ## Create an push manifest
 	docker manifest push --purge $(NAME):$(VER)
 	docker manifest create $(NAME):latest $(NAME):$(GOARCH) $(NAME):$(ARCH2)
 	docker manifest push --purge $(NAME):latest
-start: ## Start the container
-	docker run -it -rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH)
-help: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
-version: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
-new: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs new mkdocs
-serve: 
-	docker run -it  -rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
-helpserve: 
-	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
-mkbuild: 
+serve: ## Preview and live modify with auto-reloading
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
+mkbuild: ## Generate website static files
 	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build
+help: ## MkDocs commands help
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
+helpserve: ## MkDocs serve command help
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
+version: ## Display MkDocs version
+	docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -V
