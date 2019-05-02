@@ -508,7 +508,8 @@
 </pre></div>
 Or
 <div class="codehilite"><pre><span></span>docker run -it --rm -v <span class="k">$(</span>CURDIR<span class="k">)</span>:/mkdocs -p <span class="m">7777</span>:7777 elswork/mkdocs-diy mkdocs serve -a <span class="m">0</span>.0.0.0:7777
-</pre></div></p>
+</pre></div>
+Point your browser to <code>http://host-ip:7777</code> to preview site.</p>
 <h3 id="build">Build<a class="headerlink" href="#build" title="Permanent link">&para;</a></h3>
 <p>It generates all the website static files inside <strong>/docs</strong> subfolder.</p>
 <p><div class="codehilite"><pre><span></span>make build
@@ -516,7 +517,6 @@ Or
 Or
 <div class="codehilite"><pre><span></span>docker run -it --rm -v <span class="k">$(</span>CURDIR<span class="k">)</span>:/mkdocs -p <span class="m">7777</span>:7777 elswork/mkdocs-diy mkdocs build
 </pre></div></p>
-<p>Point your browser to <code>http://host-ip:7777</code></p>
 <h2 id="use-of-mermaid-diagrams">Use of mermaid diagrams<a class="headerlink" href="#use-of-mermaid-diagrams" title="Permanent link">&para;</a></h2>
 <p>This image is also configured to use <a href="https://mermaidjs.github.io">Mermaid Diagrams</a> that allow the generation of diagrams and flowcharts from text in a similar manner as markdown.
 You can use its official <a href="https://mermaidjs.github.io/mermaid-live-editor">Live editor</a> to develop your diagrams (Flowchart, Sequence diagram, Gantt diagram, Class diagram, Git graph)</p>
