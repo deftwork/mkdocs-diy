@@ -25,6 +25,8 @@ theme:
 # Avoid collision with gh-pages
 docs_dir: 'mkdocs'
 site_dir: 'docs'
+# Query string example
+edit_uri: edit/master/mkdocs/
 
 # Customization
 extra_css:
