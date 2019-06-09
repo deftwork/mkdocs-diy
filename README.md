@@ -40,7 +40,7 @@ make serve
 ``` 
 Or
 ``` sh
-docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs serve -a 0.0.0.0:7777
+docker run -it --rm -v `pwd`:/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs serve -a 0.0.0.0:7777
 ``` 
 Point your browser to `http://host-ip:7777` to preview site.
 
@@ -53,7 +53,7 @@ make build
 ``` 
 Or
 ``` sh
-docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs build
+docker run -it --rm -v `pwd`:/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs build
 ```
 
 ## Use of mermaid diagrams
