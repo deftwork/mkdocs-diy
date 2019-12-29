@@ -32,7 +32,7 @@ docker build -t elswork/mkdocs-diy .
 
 The most interesting commands of MkDocs are **serve** and **build**, depending on your development environment you can use Make (Makefile) commands that are easier to remember, otherwise you must use docker standard commands. 
 
-### Serve 
+### Serve Page
 
 Start the live-reloading docs server to preview site while perform changes.
 
@@ -45,12 +45,12 @@ docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs 
 ``` 
 Point your browser to `http://host-ip:7777` to preview site.
 
-### Build
+### MkBuild Generate Page
 
 It generates all the website static files inside **/docs** subfolder.
 
 ``` sh
-make build
+make mkbuild
 ``` 
 Or
 ``` sh
