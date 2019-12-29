@@ -11,6 +11,13 @@ repo_url: 'https://github.com/DeftWork/mkdocs-diy'
 # Copyright
 copyright: 'Copyright &copy; 2019 Eloy Lopez'
 
+# Plugins
+# plugins:
+#     - search
+#     - mkpdfs:
+#         - company: Deft.Work
+#         - author: Eloy Lopez
+
 # Configuration
 theme:
   name: 'material'
@@ -29,8 +36,8 @@ site_dir: 'docs'
 edit_uri: edit/master/mkdocs/
 
 # Customization
-extra_css:
-  - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
+# extra_css:
+#   - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
 extra_javascript:
   - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
     
