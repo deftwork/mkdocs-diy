@@ -55,7 +55,7 @@ serve: ## Preview and live modify with auto-reloading $(RUTA)/$(SITE)
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
 mkbuild: ## Generate website static files
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs build
-help: ## MkDocs commands help
+mkhelp: ## MkDocs commands help
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs -h
 helpserve: ## MkDocs serve command help
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(NAME):$(GOARCH) mkdocs serve -h
