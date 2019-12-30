@@ -21,7 +21,7 @@ A [Docker](http://docker.com) file to build images for AMD & ARM devices with a 
 
 ## Docker Image Build Instructions
 
-Build for amd64 or armv7l architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
+Build for amd64, armv7l or arm64 architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
 
 ``` sh
 docker build -t elswork/mkdocs-diy .
