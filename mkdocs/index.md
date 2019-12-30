@@ -83,3 +83,5 @@ graph TD;
     B-->D;
     C-->D;
 ```
+
+**[Sponsor me!](https://github.com/sponsors/elswork) Together we will be unstoppable.**
