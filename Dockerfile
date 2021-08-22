@@ -15,7 +15,7 @@ LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-RUN pip install mkdocs==1.0.4 \
+RUN pip install mkdocs \
     pygments \
     pymdown-extensions \
     mkdocs-material
