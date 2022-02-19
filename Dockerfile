@@ -5,15 +5,15 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
-    org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.name="mkdocs-diy" \
-    org.label-schema.description="mkdocs for amd64 and arm32v7" \
-    org.label-schema.url="https://DeftWork.github.io/mkdocs-diy/" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/deftwork/mkdocs-diy" \
-    org.label-schema.vendor="Deft Work" \
-    org.label-schema.version=$VERSION \
-    org.label-schema.schema-version="1.0"
+    org.opencontainers.image.title=mkdocs-diy \
+    org.opencontainers.image.description="My Multiarch Mkdocs Docker recipe" \
+    org.opencontainers.image.vendor=Deft.Work \
+    org.opencontainers.image.url=https://deft.work/mkdocs \
+    org.opencontainers.image.source=https://github.com/deftwork/mkdocs-diy \
+    org.opencontainers.image.version=$VERSION \ 
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.licenses=MIT
 
 RUN pip install mkdocs \
     pygments \

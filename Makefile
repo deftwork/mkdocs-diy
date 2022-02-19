@@ -3,23 +3,18 @@ RNAME ?= elswork/$(SNAME)
 VER ?= `cat VERSION`
 BASE ?= alpine
 BASENAME ?= python:$(BASE)
-RUTA ?= $(CURDIR)
+#RUTA ?= $(CURDIR)
+RUTA ?= /home/pirate/docker/www/cv-eloy.deft.work
 SITE ?= 
 TO ?= /src
-ARCH2 ?= armv7l
-ARCH3 ?= aarch64
-GOARCH := $(shell uname -m)
-ifeq ($(GOARCH),x86_64)
-	GOARCH := amd64
-endif
 TARGET_PLATFORM ?= linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
+# linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
 NO_CACHE ?= 
 # NO_CACHE ?= --no-cache
-# linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
 
 # HELP
 # This will output the help for each task
-# thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+
 .PHONY: help
 
 help: ## This help.
@@ -28,58 +23,63 @@ help: ## This help.
 .DEFAULT_GOAL := help
 
 # DOCKER TASKS
-# Build the container
 
-debug: ## Build the container
-	docker build -t $(RNAME):$(GOARCH) \
+# Build image
+
+debug: ## Debug the container
+	docker build -t $(RNAME):debug \
 	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(GOARCH)_$(VER) .
+	--build-arg VERSION=$(VER) .
 build: ## Build the container
-	docker build --no-cache -t $(RNAME):$(GOARCH) --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+	mkdir -p builds
+	docker build $(NO_CACHE) -t $(RNAME):$(VER) -t $(RNAME):latest \
+	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
-	--build-arg VERSION=$(GOARCH)_$(VER) \
-	. > ../builds/$(GOARCH)_$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
+	--build-arg VERSION=$(VER) \
+	. > builds/$(VER)_`date +"%Y%m%d_%H%M%S"`.txt
 bootstrap: ## Start multicompiler
 	docker buildx inspect --bootstrap
 debugx: ## Buildx in Debug mode
 	docker buildx build \
 	--platform ${TARGET_PLATFORM} \
-	-t $(RNAME):debug --pull --load \
+	-t $(RNAME):debug --pull \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
 buildx: ## Buildx the container
-	mkdir -p builds
 	docker buildx build $(NO_CACHE) \
 	--platform ${TARGET_PLATFORM} \
-	-t $(RNAME):latest -t $(RNAME):$(VER) --pull --push \
+	-t $(RNAME):$(VER) -t $(RNAME):latest --pull --push \
 	--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
-tag: ## Tag the container
-	docker tag $(RNAME):$(GOARCH) $(RNAME):$(GOARCH)_$(VER)
-push: ## Push the container
-	docker push $(RNAME):$(GOARCH)_$(VER)
-	docker push $(RNAME):$(GOARCH)	
-deploy: build tag push
-manifest: ## Create an push manifest
-	docker manifest create $(RNAME):$(VER) \
-	$(RNAME):$(GOARCH)_$(VER) \
-	$(RNAME):$(ARCH2)_$(VER) \
-	$(RNAME):$(ARCH3)_$(VER)
-	docker manifest push --purge $(RNAME):$(VER)
-	docker manifest create $(RNAME):latest $(RNAME):$(GOARCH) \
-	$(RNAME):$(ARCH2) \
-	$(RNAME):$(ARCH3)
-	docker manifest push --purge $(RNAME):latest
 serve: ## Preview and live modify with auto-reloading $(RUTA)/$(SITE)
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME):$(GOARCH) mkdocs serve -a 0.0.0.0:7777
+	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs serve -a 0.0.0.0:7777
 mkbuild: ## Generate website static files
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME):$(GOARCH) mkdocs build
+	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs build
 mkhelp: ## MkDocs commands help
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME):$(GOARCH) mkdocs -h
+	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs -h
 helpserve: ## MkDocs serve command help
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME):$(GOARCH) mkdocs serve -h
+	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs serve -h
 version: ## Display MkDocs version
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME):$(GOARCH) mkdocs -V
+	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs -V
+browse: ## Start browserleft
+	docker run -d \
+	--name chrome \
+	-e "ENABLE_DEBUGGER=false" \
+	-e "DISABLE_AUTO_SET_DOWNLOAD_BEHAVIOR=true" \
+	-e "DEFAULT_BLOCK_ADS=true" \
+	-p 3000:3000 \
+	browserless/chrome:latest
+screenshot: ## Start screenshot
+	docker run -d \
+	--name screenshot \
+	-e "REMOTE_BROWSER=ws://172.17.0.1:3000" \
+	-p 5001:5000 \
+	statically/screenshot:latest
+wget: ## Wget PDFs
+	wget https://localhost:5001/screenshot/pdf/cv-eloy.deft.work
+getpdf: browse screenshot wget
+kill: ## Stop containers
+	docker stop AAA
