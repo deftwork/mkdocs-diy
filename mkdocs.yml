@@ -5,84 +5,137 @@ site_author: 'Eloy Lopez'
 site_url: 'https://DeftWork.github.io/mkdocs-diy/'
 
 # Repository
-repo_name: 'DeftWork/mkdocs-diy'
-repo_url: 'https://github.com/DeftWork/mkdocs-diy'
+repo_name: DeftWork/mkdocs-diy
+repo_url: https://github.com/DeftWork/mkdocs-diy
 
 # Copyright
 copyright: 'Copyright &copy; 2022 Eloy Lopez'
 
-# Plugins
-# plugins:
-#     - search
-#     - mkpdfs:
-#         - company: Deft.Work
-#         - author: Eloy Lopez
-
 # Configuration
 theme:
-  name: 'material'
-  language: 'en'
+  name: material
+  #custom_dir: !ENV [THEME_DIR, "material"]
+
+  # Static files
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - content.code.annotate
+    - content.tabs.link
+    # - header.autohide
+    # - navigation.expand
+    - navigation.indexes
+    # - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    # - toc.integrate
   palette:
-    primary: 'indigo'
-    accent: 'indigo'
+    - scheme: default
+      #primary: indigo
+      primary: css/extra.css
+      #accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: css/extra.css
+      #accent: red
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
   font:
-    text: 'Roboto'
-    code: 'Roboto Mono'
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/images/favicon.png
+  icon:
+    logo: logo
 
 # Avoid collision with gh-pages
-docs_dir: 'mkdocs'
-site_dir: 'docs'
+#docs_dir: 'mkdocs'
+#site_dir: 'docs'
+site_dir: mkdocs
 # Query string example
 edit_uri: edit/master/mkdocs/
 
+# Plugins
+plugins:
+  - search
+#  - macros
+# - redirects:
+#       redirect_maps:
+#         changelog/insiders.md: insiders/changelog.md
+  # - minify:
+  #     minify_html: true
+
 # Customization
-# extra_css:
-#   - https://unpkg.com/mermaid@7.1.2/dist/mermaid.css
-extra_javascript:
-  - https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js
+
+extra_css:
+  - css/extra.css
     
 extra:
-  manifest: 'manifest.webmanifest'
+  analytics:
+    provider: google
+    #property: !ENV GOOGLE_ANALYTICS_KEY
+    property: UA-139487885-1
   social:
-    - type: 'github'
-      link: 'https://github.com/DeftWork'
-    - type: 'twitter'
-      link: 'https://twitter.com/elswork'
-    - type: 'linkedin'
-      link: 'https://linkedin.com/in/elswork'
-    - type: 'docker'
-      link: 'https://hub.docker.com/u/elswork'
-
-# Google Analytics
-google_analytics:
-  - 'UA-139487885-1'
-  - 'auto'
+    - icon: fontawesome/brands/github
+      link: https://github.com/elswork
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/u/elswork
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/elswork
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/elswork/
 
 # Extensions
 markdown_extensions:
   - admonition
-  - codehilite:
-      guess_lang: false
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
   - toc:
       permalink: true
-  - pymdownx.arithmatex
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.betterem:
       smart_enable: all
   - pymdownx.caret
-  - pymdownx.critic
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
   - pymdownx.inlinehilite
-  - pymdownx.magiclink
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: elswork
+      repo: cv-eloy.deft.work
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_div_format
+          class: mermaid-experimental
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      #alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-
