@@ -12,16 +12,17 @@ A [Docker](http://docker.com) file to build images for AMD & ARM devices with a 
 
 ## Details
 
-- [GitHub](https://github.com/DeftWork/mkdocs-diy)
-- [Deft.Work my personal blog](http://deft.work)
+| Website | GitHub | Docker Hub |
+| --- | --- | --- |
+| [Deft.Work my personal blog](https://deft.work/mkdocs) | [mkdocs-diy](https://github.com/DeftWork/mkdocs-diy) | [mkdocs-diy](https://hub.docker.com/r/elswork/mkdocs-diy) |
 
-| Docker Hub | Docker Pulls | Docker Stars | Docker Build | Size/Layers |
-| --- | --- | --- | --- | --- |
-| [mkdocs-diy](https://hub.docker.com/r/elswork/mkdocs-diy "elswork/mkdocs-diy on Docker Hub") | [![](https://img.shields.io/docker/pulls/elswork/mkdocs-diy.svg)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![](https://img.shields.io/docker/stars/elswork/mkdocs-diy.svg)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![](https://img.shields.io/docker/build/elswork/mkdocs-diy.svg)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![](https://images.microbadger.com/badges/image/elswork/mkdocs-diy.svg)](https://microbadger.com/images/elswork/mkdocs-diy "mkdocs-diy on microbadger.com") |
+| Docker Pulls | Docker Stars | Size | Sponsors |
+| --- | --- | --- | --- |
+| [![Docker pulls](https://img.shields.io/docker/pulls/elswork/mkdocs-diy.svg)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![Docker stars](https://img.shields.io/docker/stars/elswork/mkdocs-diy.svg)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![Docker Image size](https://img.shields.io/docker/image-size/elswork/mkdocs-diy)](https://hub.docker.com/r/elswork/mkdocs-diy "mkdocs-diy on Docker Hub") | [![GitHub Sponsors](https://img.shields.io/github/sponsors/elswork)](https://github.com/sponsors/elswork "Sponsor me!") |
 
 ## Docker Image Build Instructions
 
-Build for amd64, armv7l or arm64 architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
+Build for amd64 or armv7l architecture (thanks to its [Multi-Arch](https://blog.docker.com/2017/11/multi-arch-all-the-things/) base image)
 
 ``` sh
 docker build -t elswork/mkdocs-diy .
@@ -54,7 +55,7 @@ make mkbuild
 Or
 ``` sh
 docker run -it --rm -v $(CURDIR):/mkdocs -p 7777:7777 elswork/mkdocs-diy mkdocs build
-```
+``` 
 
 ## Use of mermaid diagrams
 
@@ -75,6 +76,8 @@ graph TD;
 
 Result:
 
+<div class="result" markdown>
+
 ``` mermaid
 graph TD;
     A-->B;
@@ -82,6 +85,7 @@ graph TD;
     B-->D;
     C-->D;
 ```
+</div>
 
 **[Sponsor me!](https://github.com/sponsors/elswork) Together we will be unstoppable.**
 

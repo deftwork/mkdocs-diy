@@ -18,6 +18,7 @@ LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
 RUN pip install mkdocs \
     pygments \
     pymdown-extensions \
+    markdown \
     mkdocs-material
 
 WORKDIR /mkdocs
