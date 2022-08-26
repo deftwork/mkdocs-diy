@@ -54,6 +54,8 @@ buildx: ## Buildx the container
 	--build-arg VCS_REF=`git rev-parse --short HEAD` \
 	--build-arg BASEIMAGE=$(BASENAME) \
 	--build-arg VERSION=$(VER) .
+upgrade: ## Upgrade local version
+	docker pull $(RNAME):latest
 serve: ## Preview and live modify with auto-reloading $(RUTA)/$(SITE)
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs serve -a 0.0.0.0:7777
 mkbuild: ## Generate website static files
