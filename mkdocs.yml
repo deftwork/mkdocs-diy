@@ -68,7 +68,7 @@ theme:
 #site_dir: 'docs'
 site_dir: mkdocs
 # Query string example
-edit_uri: edit/master/mkdocs/
+edit_uri: edit/master/docs/
 
 # Plugins
 plugins:
