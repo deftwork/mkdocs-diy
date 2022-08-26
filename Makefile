@@ -59,11 +59,11 @@ serve: ## Preview and live modify with auto-reloading $(RUTA)/$(SITE)
 mkbuild: ## Generate website static files
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs build
 mkhelp: ## MkDocs commands help
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs -h
+	docker run -it --rm  $(RNAME) mkdocs -h
 helpserve: ## MkDocs serve command help
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs serve -h
+	docker run -it --rm $(RNAME) mkdocs serve -h
 version: ## Display MkDocs version
-	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs -V
+	docker run -it --rm $(RNAME):debug mkdocs -V
 browse: ## Start browserleft
 	docker run -d \
 	--name chrome \
