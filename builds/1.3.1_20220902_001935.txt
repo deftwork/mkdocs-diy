@@ -1,0 +1,19 @@
+Sending build context to Docker daemon  5.209MB
+Step 1/10 : ARG BASEIMAGE=python:alpine
+Step 2/10 : FROM ${BASEIMAGE}
+alpine: Pulling from library/python
+c6556b3b6858: Already exists
+fe115a90a2a7: Pulling fs layer
+7011ad146248: Pulling fs layer
+7cdde388dddc: Pulling fs layer
+5fbe2eb7a6e5: Pulling fs layer
+5fbe2eb7a6e5: Waiting
+7cdde388dddc: Verifying Checksum
+7cdde388dddc: Download complete
+fe115a90a2a7: Verifying Checksum
+fe115a90a2a7: Download complete
+5fbe2eb7a6e5: Verifying Checksum
+5fbe2eb7a6e5: Download complete
+7011ad146248: Verifying Checksum
+7011ad146248: Download complete
+fe115a90a2a7: Pull complete

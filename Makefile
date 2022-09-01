@@ -68,7 +68,7 @@ version: ## Display MkDocs version
 	docker run -it --rm $(RNAME):debug mkdocs -V
 browse: ## Start browserleft
 	docker run -d \
-	--name chrome \
+	--name chrome2 \
 	-e "ENABLE_DEBUGGER=false" \
 	-e "DISABLE_AUTO_SET_DOWNLOAD_BEHAVIOR=true" \
 	-e "DEFAULT_BLOCK_ADS=true" \
@@ -76,7 +76,7 @@ browse: ## Start browserleft
 	browserless/chrome:latest
 screenshot: ## Start screenshot
 	docker run -d \
-	--name screenshot \
+	--name screenshot2 \
 	-e "REMOTE_BROWSER=ws://172.17.0.1:3000" \
 	-p 5001:5000 \
 	statically/screenshot:latest
