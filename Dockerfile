@@ -1,4 +1,4 @@
-ARG BASEIMAGE=python:alpine
+ARG BASEIMAGE=python:3.12.4-alpine3.20
 FROM ${BASEIMAGE}
 
 ARG BUILD_DATE
