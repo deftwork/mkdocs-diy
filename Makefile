@@ -60,6 +60,8 @@ serve: ## Preview and live modify with auto-reloading $(RUTA)/$(SITE)
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs serve -a 0.0.0.0:7777
 mkbuild: ## Generate website static files
 	docker run -it --rm -v $(RUTA)/$(SITE):/mkdocs -p 7777:7777 $(RNAME) mkdocs build
+mkbuildx: ## Generate website static files
+	docker run --rm -it -v $(RUTA)/$(SITE):/docs squidfunk/mkdocs-material build	
 mkhelp: ## MkDocs commands help
 	docker run -it --rm  $(RNAME) mkdocs -h
 helpserve: ## MkDocs serve command help

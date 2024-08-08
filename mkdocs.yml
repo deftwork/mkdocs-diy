@@ -9,7 +9,7 @@ repo_name: DeftWork/mkdocs-diy
 repo_url: https://github.com/DeftWork/mkdocs-diy
 
 # Copyright
-copyright: 'Copyright &copy; 2022 Eloy Lopez'
+copyright: 'Copyright &copy; 2024 Eloy Lopez'
 
 # Configuration
 theme:
